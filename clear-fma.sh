@@ -20,4 +20,9 @@ fmadm -q reset eft
 fmadm -q reset io-retire
 fmadm -q reset slow-io-de
 
+if [ -f /etc/devices/retire_store ]; then
+    echo "removing retire_store; system will require a reboot to restore retired devices"
+    rm /etc/devices/retire_store
+fi
+
 echo 'Complete!'
