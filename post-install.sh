@@ -69,3 +69,17 @@ echo "* `date`" >> /etc/system
 echo "set snooping=1" >> /etc/system
 echo "set pcplusmp:apic_panic_on_nmi=1" >> /etc/system
 echo "set apix:apic_panic_on_nmi = 1" >> /etc/system
+
+#
+# add tunables for 10G networking
+#
+echo "setting 10G tunables..."
+echo "" >> /etc/system
+echo "* 10G tunables" >> /etc/system
+echo "* `date`" >> /etc/system
+echo "set ndd:tcp_wscale_always=1" >> /etc/system
+echo "set ndd:tcp_tstamp_if_wscale=1" >> /etc/system
+echo "set ndd:tcp_max_buf=16777216" >> /etc/system
+echo "set ndd:tcp_cwnd_max=8388608" >> /etc/system
+echo "set ndd:tcp_xmit_hiwat=1048576" >> /etc/system
+echo "set ndd:tcp_recv_hiwat=1048576" >> /etc/system
