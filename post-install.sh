@@ -43,9 +43,17 @@ svcadm restart network/smb/server
 #
 # Increase swap
 #
-echo "Incresing swap..."
+echo "Increasing swap..."
 swap -d /dev/zvol/dsk/syspool/swap
-zfs set volsize=`prtconf | grep "^Mem" | /usr/gnu/bin/awk '{printf "%d" , (($3*1024*1024)/4)'}` syspool/swap
+SWAPSIZE=`prtconf | grep '^Mem' | /usr/gnu/bin/awk '{printf "%d" , (($3*1024*1024)/4)}'`
+# low end -- memory should only be below 16G if we're on a VSA of some sort, but we
+#            need to make sure that we keep *at least* 1G of swap.
+if [[ $SWAPSIZE -lt 1073741824 ]]; then
+    SWAPSIZE=1G
+elif [[ $SWAPSIZE -gt 68719476736 ]]; then
+    SWAPSIZE=64G
+fi
+zfs set volsize=$SWAPSIZE syspool/swap
 swap -a /dev/zvol/dsk/syspool/swap
 
 #
