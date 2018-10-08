@@ -86,7 +86,7 @@ echo "set apix:apic_panic_on_nmi = 1" >> /etc/system
 # add tunables for 10G networking; /etc/system as previous does not work
 #
 echo "setting 10G tunables..."
-logger -p XX "setting 10G tunables..."
+
 ipadm set-prop -p send_buf=1048576 tcp
 ipadm set-prop -p recv_buf=1048576 tcp
 ipadm set-prop -p max_buf=16777216 tcp
