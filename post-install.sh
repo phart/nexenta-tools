@@ -93,3 +93,18 @@ ipadm set-prop -p max_buf=16777216 tcp
 ipadm set-prop -p _wscale_always=1 tcp
 ipadm set-prop -p _tstamp_if_wscale=1 tcp
 ipadm set-prop -p _cwnd_max=8388608 tcp
+
+#
+# install fmware tools if this is a VSA
+#
+dmidecode -t 1 | grep 'Product Name' | grep -i vmware > /dev/null
+if [ $? == 0 ]; then
+    echo "VMware detected, checking for vmware tools...."
+    dpkg -l | grep 'Open Virtual Machine Tools' > /dev/null
+    if [ $? != 0 ]; then
+        echo "Open VM Tools being installed..."
+        apt-get install service-management-open-vm-tools
+    else
+        echo "Open VM Tools found"
+    fi
+fi
