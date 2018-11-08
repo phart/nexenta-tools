@@ -103,7 +103,7 @@ if [ $? == 0 ]; then
     dpkg -l | grep 'Open Virtual Machine Tools' > /dev/null
     if [ $? != 0 ]; then
         echo "Open VM Tools being installed..."
-        apt-get install service-management-open-vm-tools
+        dpkg -i service-management-open-vm-tools_40-0-2_solaris-i386.deb
     else
         echo "Open VM Tools found"
     fi
