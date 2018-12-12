@@ -48,7 +48,7 @@ swap -d /dev/zvol/dsk/syspool/swap
 MEMSIZE=`prtconf | grep '^Mem' | /usr/gnu/bin/awk '{printf "%d", ($3/1024)}'`
 if [[ "$MEMSIZE" -le 4 ]]; then
     SWAPSIZE=1G
-elif [[ "$MEMSIZE" -le 4 ]]; then
+elif [[ "$MEMSIZE" -le 64 ]]; then
     SWAPSIZE=2G
 elif [[ "$MEMSIZE" -lt 128 ]]; then
     SWAPSIZE=4G
